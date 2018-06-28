@@ -1,0 +1,10 @@
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      select ifnull((select E1.Salary from Employee E1 
+             join Employee E2 on E2.Salary >= E1.Salary 
+             group by E1.Salary having count(distinct E2.Salary) = N), null)
+      
+  );
+END
